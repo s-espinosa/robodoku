@@ -14,6 +14,6 @@ class Spot
   end
 
   def set_value
-    @value = @potential_values[0] if @potential_values.length == 1
+    @value = @potential_values[0].to_s if @potential_values.length == 1
   end
 end

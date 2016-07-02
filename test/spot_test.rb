@@ -33,7 +33,7 @@ class SpotTest < Minitest::Test
     spot = Spot.new(" ", [1, 2, 3, 5], 5)
     spot.set_value
 
-    assert(spot.value == 4)
+    assert(spot.value == "4")
   end
 
   def test_it_does_not_set_its_value_when_options_exist

@@ -1,11 +1,11 @@
 require_relative './spot'
 
 class Solver
-  attr_reader :puzzle, :working, :columns, :square_size
+  attr_reader :puzzle, :working, :rows, :square_size
 
   def initialize(puzzle_text)
     @puzzle  = parse(puzzle_text)
-    @columns = @puzzle[0].count
+    @rows = @puzzle.count
     @square_size = square_size
     @working = create_working(@puzzle)
   end
@@ -16,13 +16,22 @@ class Solver
       row = line.split('')[0..-2]
       puzzle << row
     end
-    @puzzle = puzzle
+    @puzzle = check_lines(puzzle)
+  end
+
+  def check_lines(puzzle)
+    rows = puzzle.count
+    puzzle.map do |line|
+      missing = rows - line.length
+      missing.times { line << " " }
+      line
+    end
   end
 
   def create_working(puzzle)
     working = puzzle.map.with_index do |row, row_index|
       row.map.with_index do |digit, column_index|
-        Spot.new(digit, neighbors(row_index, column_index), @columns)
+        Spot.new(digit, neighbors(row_index, column_index), @rows)
       end
     end
   end
@@ -36,10 +45,10 @@ class Solver
   end
 
   def square_size
-    if @columns == 2
+    if @rows == 2
       1
     else
-      Math.sqrt(@columns).to_i
+      Math.sqrt(@rows).to_i
     end
   end
 

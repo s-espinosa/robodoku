@@ -25,8 +25,8 @@ class SolverTest < Minitest::Test
     assert(solver.working[0][0].class == Spot)
   end
 
-  def test_it_knows_how_many_columns_the_puzzle_has
-    assert(solver.columns == 2)
+  def test_it_knows_how_many_rows_the_puzzle_has
+    assert(solver.rows == 2)
   end
 
   def test_it_knows_its_square_size
@@ -34,7 +34,7 @@ class SolverTest < Minitest::Test
   end
 
   def test_it_knows_its_square_size_for_larger_squares
-    assert(medium_solver.columns == 4)
+    assert(medium_solver.rows == 4)
     assert(medium_solver.square_size == 2)
   end
 
