@@ -1,7 +1,7 @@
 require_relative './spot'
 
 class Solver
-  attr_reader :puzzle, :working, :columns
+  attr_reader :puzzle, :working, :columns, :square_size
 
   def initialize(puzzle_text)
     @puzzle  = parse(puzzle_text)
@@ -57,5 +57,18 @@ class Solver
     @puzzle.map do |row|
       row[column]
     end
+  end
+
+  def in_square(row, column)
+    in_square = []
+    row_start        = row / square_size * square_size
+    column_start     = column / square_size * square_size
+
+    square_size.times do |i|
+      square_size.times do |j|
+        in_square << @puzzle[row_start + i][column_start + j]
+      end
+    end
+    in_square
   end
 end
