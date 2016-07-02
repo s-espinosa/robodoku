@@ -71,4 +71,9 @@ class Solver
     end
     in_square
   end
+
+  def square_neighbors(row, column)
+    value = @puzzle[row][column]
+    in_square(row, column).reject{|a| a == value || a == " "}
+  end
 end

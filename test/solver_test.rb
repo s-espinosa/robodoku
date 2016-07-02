@@ -56,4 +56,9 @@ class SolverTest < Minitest::Test
     assert(medium_solver.in_square(0, 2) == ["4", "1", "3", "2"])
     assert(medium_solver.in_square(3, 2) == ["2", "3", " ", "4"])
   end
+
+  def test_it_can_find_square_neighbors
+    assert(medium_solver.square_neighbors(2, 2) == ["3", "4"])
+    assert(medium_solver.square_neighbors(0, 1) == ["3", "4", "1"])
+  end
 end
