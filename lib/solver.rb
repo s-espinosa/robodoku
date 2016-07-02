@@ -20,10 +20,9 @@ class Solver
   end
 
   def create_working(puzzle)
-    working = puzzle.map do |row|
-      row.map.with_index do |digit, index|
-        Spot.new(digit, [], @columns)
-        #Spot.new(digit, neighbors(row, index), @columns)
+    working = puzzle.map.with_index do |row, row_index|
+      row.map.with_index do |digit, column_index|
+        Spot.new(digit, neighbors(row_index, column_index), @columns)
       end
     end
   end
@@ -77,5 +76,34 @@ class Solver
   def square_neighbors(row, column)
     value = @puzzle[row][column]
     in_square(row, column).reject{|a| a == value || a == " "}
+  end
+
+  def working_values
+    working.map do |row|
+      row.map do |spot|
+        spot.value
+      end
+    end
+  end
+
+  def solve
+    until(working_values.flatten.detect{|i| i == " "} == nil) do
+      set_values
+      @working = create_working(working_values)
+    end
+    format(working_values)
+  end
+
+  def set_values
+    working.each do |row|
+      row.each do |spot|
+        spot.set_value
+      end
+    end
+  end
+
+  def format(working_array)
+    working_array.each {|row| row << "\n" }
+    working_array.flatten.join("")
   end
 end

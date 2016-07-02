@@ -67,4 +67,12 @@ class SolverTest < Minitest::Test
     assert(medium_solver.neighbors(3, 1) == [1, 2, 4])
     assert(medium_solver.neighbors(0, 0) == [1, 2, 4])
   end
+
+  def test_it_can_return_working_values
+    assert(solver.working_values == [[" ", "2"], ["2", "1"]])
+  end
+
+  def test_it_can_solve_a_trivial_puzzle
+    assert(solver.solve == "12\n21\n")
+  end
 end
