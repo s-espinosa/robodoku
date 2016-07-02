@@ -29,9 +29,11 @@ class Solver
   end
 
   def neighbors(row, column)
-    row_neighbors = find_row_neighbors(row, column)
-    column_neighbors = find_column_neighbors(row, column)
-    square_neighbors = find_square_neighbors(row, column)
+    row_neighbors    = row_neighbors(row, column)
+    column_neighbors = column_neighbors(row, column)
+    square_neighbors = square_neighbors(row, column)
+    all_neighbors    = row_neighbors | column_neighbors | square_neighbors
+    all_neighbors.map {|digit| digit.to_i }.sort
   end
 
   def square_size
